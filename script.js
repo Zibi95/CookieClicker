@@ -1,17 +1,29 @@
 const button = document.querySelector('.cake__button');
-const doughCounter = document.querySelector('.cake__count')
 const progressBar = document.querySelector('.progress-bar-fill');
+const doughCounter = document.querySelector('.cake__count');
+const flourState = document.querySelector('.flour__info');
 
-let done = false;
+let proccessing = false;
 let pause = true;
 let animationId;
 
 const bakery = {
   doughBalls: 0,
+  flour: 100,
+  isFlour: true,
   
   increaseDoughBall() {
     this.doughBalls++;
     doughCounter.textContent = this.doughBalls;
+  },
+
+  useFlour() {
+    if (this.flour >= 10) {
+      this.flour -= 10;
+      flourState.textContent = this.flour;
+    } else {
+      this.isFlour = false;
+    }
   }
 }
 
@@ -25,8 +37,8 @@ function createProgressBar() {
   return function loading() {
     width += 100 / 240;
 
-    if (width > 100) {
-      done = true;
+    if (width >= 100) {
+      proccessing = false;
       pause = true;
       width = 0;
       changeButtonName();
@@ -35,19 +47,27 @@ function createProgressBar() {
 
     progressBar.style.width = `${width}%`;
 
-    if (!done) {
+    if (proccessing) {
       animationId = requestAnimationFrame(loading);
-    } else {
-      done = false;
     }
   };
 }
 
 function toggleProgess() {
+  if (!proccessing) {
+    bakery.useFlour();
+  }
+
+  if (!bakery.isFlour) {
+    flourLowInformation();
+    return;
+  }
+
   pause = !pause
   changeButtonName();
 
   if (!pause) {
+    proccessing = true;
     makeDoughBall();
   } else {
     cancelAnimationFrame(animationId);
@@ -55,7 +75,7 @@ function toggleProgess() {
 }
 
 function changeButtonName() {
-  if (!pause && !done) {
+  if (!pause) {
     button.classList.add('cake__button--pause')
     button.textContent = 'Zatrzymaj lepienie'
   } else {
@@ -64,4 +84,14 @@ function changeButtonName() {
   }
 }
 
+function flourLowInformation() {
+  const flourInfo = button.nextElementSibling;
 
+  if (!bakery.isFlour) {
+    flourInfo.classList.remove('hidden')
+    button.setAttribute('disabled', 'true') 
+  } else {
+    flourInfo.classList.add('hidden')
+    button.removeAttribute('disabled')
+  }
+}

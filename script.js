@@ -15,11 +15,15 @@ const bakery = {
   }
 }
 
+const makeDoughBall = createProgressBar();
+
+button.addEventListener('click', toggleProgess);
+
 function createProgressBar() {
   width = 0;
 
   return function loading() {
-    width += 0.4;
+    width += 100 / 240;
 
     if (width > 100) {
       done = true;
@@ -52,14 +56,12 @@ function toggleProgess() {
 
 function changeButtonName() {
   if (!pause && !done) {
+    button.classList.add('cake__button--pause')
     button.textContent = 'Zatrzymaj lepienie'
   } else {
+    button.classList.remove('cake__button--pause')
     button.textContent = 'Ulep Ciasto'
   }
 }
 
-button.addEventListener('click', () => {
-  toggleProgess()
-});
 
-const makeDoughBall = createProgressBar();

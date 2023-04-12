@@ -5,9 +5,18 @@
   gap: 10px;
 }
 
+.cake__info {
+  font-size: 20px;
+}
+
+.cake__count {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
 .progress-bar {
   width: 100px;
-  background-color: #e0e0e0;
+  background-color: #3d31316c;
   border-radius: 3px;
 }
 
@@ -16,4 +25,19 @@
   height: 10px;
   background-color: #17e004;
   border-radius: 3px;
+}
+
+.cake__button {
+  font-weight: 700;
+  padding: 10px;
+  width: 150px;
+  border-radius: 10px;
+  border: 1px solid black;
+  background-color: #17e004;
+  transition: background-color 0.5s;
+}
+
+.cake__button--pause {
+  background-color: #fe2525;
+  color: white;
 }

@@ -1,56 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>CookieClicker</title>
-</head>
-<body>
-  <div class="cake">
-    <p class="cake__info">Liczba ulepionych ciastowych kul: 
-      <span class="cake__count">0</span>
-    </p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link
+      rel="stylesheet"
+      href="style.css"
+    />
+    <title>CookieClicker</title>
+  </head>
+  <body>
+    <div class="cake">
+      <p class="cake__info">
+        Liczba ulepionych ciastowych kul:
+        <span class="cake__count">0</span>
+      </p>
 
-    <p class="flour">Ilość mąki: 
-      <span class="flour__info">100kg</span>
-    </p>
+      <p class="flour">
+        Ilość mąki:
+        <span class="flour__info">100kg</span>
+      </p>
 
-    <div class="progress-bar">
-      <span class="progress-bar-fill" style="width: 0%;"></span>
-    </div>
+      <div class="progress-bar">
+        <span
+          class="progress-bar-fill"
+          style="width: 0%"
+        ></span>
+      </div>
 
-    <div>
-      <button class="cake__button">Ulep Ciasto</button>
+      <div>
+        <button class="cake__button">Ulep Ciasto</button>
 
-      <span class="cake__button-info hidden">Za mało mąki</span>
-    </div>
+        <span class="cake__button-info hidden">Za mało mąki</span>
+      </div>
 
-    <div class="cookies-table">
-    </div>
-    <p>Liczba ulepionych ciastek: <span class="cookies-table__count">0</span></p>
+      <div class="cookies-table"></div>
+      <p>
+        Liczba ulepionych ciastek: <span class="cookies-table__count">0</span>
+      </p>
 
-    <div class="stove">
-      <button class="stove__button">Włoż jedno ciastko do pieca</button>
-      <button class="stove__button">Zapełnij piec</button>
+      <div class="stove">
+        <button class="stove__button">Włoż jedno ciastko do pieca</button>
+        <button class="stove__button">Zapełnij piec</button>
 
-      <p class="stove__info">Liczba ciastek w piecu: <span class="stove__inside">0</span>/9</p>
+        <p class="stove__info">
+          Liczba ciastek w piecu: <span class="stove__inside">0</span>/9
+        </p>
 
-      <div class="oven">
-        <div class="oven__slot" data-slot="1"></div>
-        <div class="oven__slot" data-slot="2"></div>
-        <div class="oven__slot" data-slot="3"></div>
-        <div class="oven__slot" data-slot="4"></div>
-        <div class="oven__slot" data-slot="5"></div>
-        <div class="oven__slot" data-slot="6"></div>
-        <div class="oven__slot" data-slot="7"></div>
-        <div class="oven__slot" data-slot="8"></div>
-        <div class="oven__slot" data-slot="9"></div>
+        <div class="oven">
+          <div
+            class="oven__slot"
+            data-slot="1"
+          ></div>
+          <div
+            class="oven__slot"
+            data-slot="2"
+          ></div>
+          <div
+            class="oven__slot"
+            data-slot="3"
+          ></div>
+          <div
+            class="oven__slot"
+            data-slot="4"
+          ></div>
+          <div
+            class="oven__slot"
+            data-slot="5"
+          ></div>
+          <div
+            class="oven__slot"
+            data-slot="6"
+          ></div>
+          <div
+            class="oven__slot"
+            data-slot="7"
+          ></div>
+          <div
+            class="oven__slot"
+            data-slot="8"
+          ></div>
+          <div
+            class="oven__slot"
+            data-slot="9"
+          ></div>
+        </div>
       </div>
     </div>
-  </div>
-  
-  <script src="script.js"></script>
-</body>
+
+    <script src="script.js"></script>
+  </body>
 </html>

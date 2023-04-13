@@ -7,6 +7,7 @@ const cookiesTablePopup = document.querySelector('.cookies-table--click')
 const rawCookiesCounter = document.querySelector('.cookies-table__count')
 const stoveButton = document.querySelector('.stove__button');
 const stoveCounter = document.querySelector('.stove__inside');
+const oven = document.querySelector('.stove');
 
 let proccessing = false;
 let pause = true;
@@ -63,6 +64,7 @@ const bakery = {
       this.rawCookies--;
       this.stove++;
   
+      bakeCookies()
       updateUI(this);
     }
   },
@@ -77,14 +79,23 @@ const bakery = {
     if (toFill <= this.rawCookies) {
       this.stove += toFill;
       this.rawCookies -= toFill
+      bakeCookies(toFill);
     } else {
       this.stove += this.rawCookies;
+      bakeCookies(this.rawCookies);
       this.rawCookies = 0;
       alert('Robiliśmy co w naszej mocy, ale mamy za mało ciastek')
     }
 
     updateUI(this);
+  },
+
+  burntCookie() {
+    this.stove--;
+    updateUI(this);
   }
+
+  
 }
 
 function updateUI(bakery) {
@@ -178,6 +189,56 @@ function toggleProcess() {
     makeDoughBall();
   } else {
     cancelAnimationFrame(animationId);
+  }
+}
+
+function bake (slot) {
+  let start;
+  let animationId;
+
+  return function baking(timestamp) {
+    if (!start) {
+      start = timestamp;
+    }
+
+    const timer = timestamp - start;
+
+    if (timer > 3000) {
+      slot.style.backgroundColor = "orange";
+    }
+    if (timer > 6000) {
+      slot.style.backgroundColor = 'brown';
+    } 
+    if (timer > 9000) {
+      slot.style.backgroundColor = 'black';
+    } 
+    if (timer >= 12000) {
+      bakery.burntCookie();
+      slot.style.backgroundColor = 'white';
+    }
+
+    animationId = requestAnimationFrame(baking);
+
+    if(slot.style.backgroundColor === 'white') {
+      cancelAnimationFrame(animationId)
+    }
+  }
+}
+
+function bakeCookies(cookiesCount = 1) {
+  const slotList = Array.from(oven.querySelectorAll('.oven__slot'));
+
+  while (cookiesCount > 0) {
+    slotList.some(slot => {
+      if (slot.style.backgroundColor === 'white' || !slot.style.backgroundColor) {
+        slot.style.backgroundColor = "yellow";
+        bake(slot)();
+
+        return true
+      }
+    })
+
+    cookiesCount--;
   }
 }
 

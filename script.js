@@ -3,6 +3,7 @@ const progressBar = document.querySelector('.progress-bar-fill');
 const doughCounter = document.querySelector('.cake__count');
 const flourState = document.querySelector('.flour__info');
 const cookiesTable = document.querySelector('.cookies-table')
+const cookiesTablePopup = document.querySelector('.cookies-table--click')
 const rawCookiesCounter = document.querySelector('.cookies-table__count')
 const stoveButton = document.querySelector('.stove__button');
 const stoveCounter = document.querySelector('.stove__inside');
@@ -127,8 +128,17 @@ function displayDoughBalls(doughBalls) {
   cookiesTable.insertAdjacentHTML("afterbegin", markup);
 }
 
+function displayOnClick(x, y) {
+  const div = document.createElement('div');
+  div.innerHTML = `<div class="cookies-table--click" style="top:${y}px; left:${x}px">+1</div>`
 
-function createProgressBar() {
+  document.body.append(div);
+
+  setTimeout(() => div.remove(), 1500)
+}
+
+
+const makeDoughBall = (function () {
   width = 0;
 
   return function loading() {
@@ -148,9 +158,7 @@ function createProgressBar() {
       animationId = requestAnimationFrame(loading);
     }
   };
-}
-
-const makeDoughBall = createProgressBar();
+})()
 
 function toggleProcess() {
   if (!proccessing) {
@@ -177,8 +185,10 @@ doughButton.addEventListener('click', toggleProcess);
 
 cookiesTable.addEventListener('click', (event) => {
   const { id } = event.target;
+  const [x, y] = [event.clientX, event.clientY];
 
   if (id) {
+    displayOnClick(x, y)
     bakery.makeCookie(id);
   }
 })

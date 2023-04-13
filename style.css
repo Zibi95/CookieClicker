@@ -1,5 +1,6 @@
 body {
   background-color: antiquewhite;
+  position: relative;
 }
 
 .hidden {
@@ -70,6 +71,14 @@ body {
   gap: 20px;
 }
 
+.cookies-table--click {
+  position: absolute;
+  font-size: 32px;
+  z-index: -1;
+  animation-name: clickEvent;
+  animation-duration: 1.5s;
+}
+
 .cookie {
   border-radius: 50%;
   background-color: yellow;
@@ -97,4 +106,14 @@ body {
 
 .oven__slot {
   border: 1px solid black;
+}
+
+/* animation */
+
+@keyframes clickEvent {
+  0%   {opacity: 0; font-size: 16px;}
+  25%  {opacity: 0.2; font-size: 20px;}
+  50%  {opacity: 0.5; font-size: 24px;}
+  75%  {opacity: 0.7; font-size: 28px;}
+  100% {opacity: 1; font-size: 32px;}
 }

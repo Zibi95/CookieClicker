@@ -74,7 +74,7 @@ body {
 .cookies-table--click {
   position: absolute;
   font-size: 32px;
-  z-index: -1;
+  pointer-events: none;
   animation-name: clickEvent;
   animation-duration: 1.5s;
 }

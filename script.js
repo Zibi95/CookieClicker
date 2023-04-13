@@ -1,9 +1,11 @@
-const button = document.querySelector('.cake__button');
+const doughButton = document.querySelector('.cake__button');
 const progressBar = document.querySelector('.progress-bar-fill');
 const doughCounter = document.querySelector('.cake__count');
 const flourState = document.querySelector('.flour__info');
 const cookiesTable = document.querySelector('.cookies-table')
 const rawCookiesCounter = document.querySelector('.cookies-table__count')
+const stoveButton = document.querySelector('.stove__button');
+const stoveCounter = document.querySelector('.stove__inside');
 
 let proccessing = false;
 let pause = true;
@@ -14,6 +16,8 @@ const bakery = {
   flour: 100,
   isFlour: true,
   rawCookies: 0,
+  stove: 0,
+  stoveCapacity: 9,
   
   increaseDoughBall() {
     this.doughBalls.push({ width:50, id:this.doughBalls.length });
@@ -46,6 +50,39 @@ const bakery = {
   checkDoughBalls() {
     this.doughBalls = this.doughBalls.filter(el => el.width > 0)
     updateUI(this);
+  },
+
+  putRawCookieInStove() {
+    if (this.stove >= this.stoveCapacity) {
+      alert('Piec jest pełen')
+      return;
+    }
+
+    if (this.rawCookies > 0) {
+      this.rawCookies--;
+      this.stove++;
+  
+      updateUI(this);
+    }
+  },
+
+  fillStove() {
+    if (this.stove >= this.stoveCapacity || this.rawCookies <= 0) {
+      return;
+    }
+
+    const toFill = this.stoveCapacity - this.stove;
+
+    if (toFill <= this.rawCookies) {
+      this.stove += toFill;
+      this.rawCookies -= toFill
+    } else {
+      this.stove += this.rawCookies;
+      this.rawCookies = 0;
+      alert('Robiliśmy co w naszej mocy, ale mamy za mało ciastek')
+    }
+
+    updateUI(this);
   }
 }
 
@@ -53,15 +90,16 @@ function updateUI(bakery) {
   flourState.textContent = `${bakery.flour}kg`;
   doughCounter.textContent = bakery.doughBalls.length;
   rawCookiesCounter.textContent = bakery.rawCookies;
+  stoveCounter.textContent = bakery.stove;
 } 
 
 function changeButtonName() {
   if (!pause) {
-    button.classList.add('cake__button--pause')
-    button.textContent = 'Zatrzymaj lepienie'
+    doughButton.classList.add('cake__button--pause')
+    doughButton.textContent = 'Zatrzymaj lepienie'
   } else {
-    button.classList.remove('cake__button--pause')
-    button.textContent = 'Ulep Ciasto'
+    doughButton.classList.remove('cake__button--pause')
+    doughButton.textContent = 'Ulep Ciasto'
   }
 }
 
@@ -135,7 +173,8 @@ function toggleProcess() {
   }
 }
 
-button.addEventListener('click', toggleProcess);
+doughButton.addEventListener('click', toggleProcess);
+
 cookiesTable.addEventListener('click', (event) => {
   const { id } = event.target;
 
@@ -143,3 +182,7 @@ cookiesTable.addEventListener('click', (event) => {
     bakery.makeCookie(id);
   }
 })
+
+stoveButton.addEventListener('click', bakery.putRawCookieInStove.bind(bakery));
+
+stoveButton.nextElementSibling.addEventListener('click', bakery.fillStove.bind(bakery));

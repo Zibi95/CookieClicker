@@ -74,3 +74,27 @@ body {
   border-radius: 50%;
   background-color: yellow;
 }
+
+/* STOVE */
+
+.stove__button {
+  border-radius: 10px;
+  padding: 10px;
+  background-color: firebrick;
+  color: white;
+}
+
+.stove__info {
+  text-align: center;
+}
+
+.oven {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3,100px);
+  border: 1px solid black;
+}
+
+.oven__slot {
+  border: 1px solid black;
+}

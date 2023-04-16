@@ -83,18 +83,17 @@ const bakery = {
       return;
     }
 
-    const toFill = this.stoveCapacity - this.stove;
+    const toFill = this.stoveCapacity - this.stove <= this.rawCookies
+      ? this.stoveCapacity - this.stove
+      : this.rawCookies;
 
-    if (toFill <= this.rawCookies) {
-      this.stove += toFill;
-      this.rawCookies -= toFill;
-      bakeCookies(toFill);
-    } else {
-      this.stove += this.rawCookies;
-      bakeCookies(this.rawCookies);
-      this.rawCookies = 0;
+    if (toFill === this.rawCookies) {
       alert('Robiliśmy co w naszej mocy, ale mamy za mało ciastek');
     }
+
+    this.stove += toFill;
+    this.rawCookies -= toFill;
+    bakeCookies(toFill);
 
     updateUI(this);
   },

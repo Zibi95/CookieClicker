@@ -171,6 +171,7 @@ function displayDoughBalls(doughBalls) {
 
   let markup = doughBalls.reduce((accumulator, current) => {
     const { width, id } = current;
+    
 
     return (
       accumulator +
@@ -183,7 +184,10 @@ function displayDoughBalls(doughBalls) {
 
 function displayOnClick(x, y) {
   const div = document.createElement('div');
-  div.innerHTML = `<div class="cookies-table--click" style="top:${y}px; left:${x}px">+1</div>`;
+  const randomNumber = getRandomNumberInRange(-50,20)
+  const randomNumber2 = getRandomNumberInRange(-50,20)
+
+  div.innerHTML = `<div class="cookies-table--click" style="top:${y + randomNumber}px; left:${x + randomNumber2}px">+1</div>`;
 
   document.body.append(div);
 
@@ -244,16 +248,13 @@ function bake(slot) {
 
     const timer = timestamp - start;
 
-    if (timer > 3000) {
+    if (timer > 3000 && timer <= 6000) {
       slot.style.backgroundColor = 'orange';
-    }
-    if (timer > 6000) {
+    } else if (timer > 6000 && timer <= 9000) {
       slot.style.backgroundColor = 'brown';
-    }
-    if (timer > 9000) {
+    } else if (timer > 9000 && timer <= 12000) {
       slot.style.backgroundColor = 'black';
-    }
-    if (timer >= 12000) {
+    } else if (timer >= 12000) { 
       bakery.badCookie();
       slot.style.backgroundColor = '';
     }

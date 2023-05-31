@@ -1,5 +1,5 @@
 # CookieClicker
-##[TRY OUT](https://zibi95.github.io/CookieClicker/)
+## [TRY OUT](https://zibi95.github.io/CookieClicker/)
 
 The project "Cookie Clicker" is built using HTML, CSS, and vanilla JavaScript.
 It is a simple web-based game where the objective is to click on a cookie to earn points.
